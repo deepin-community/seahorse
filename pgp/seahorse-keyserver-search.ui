@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="3.22"/>
+  <template class="SeahorseKeyserverSearch" parent="GtkDialog">
+    <property name="visible">True</property>
+    <property name="border_width">18</property>
+    <property name="use_header_bar">1</property>
+    <property name="title" translatable="yes">Find Remote Keys</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="border_width">6</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">find-location-symbolic</property>
+                <property name="icon-size">5</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="publish-message">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">This will find keys for others on the Internet. These keys can then be imported into your local key ring.</property>
+                <property name="max_width_chars">60</property>
+                <property name="wrap">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">_Search for keys containing: </property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">search_entry</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="search_entry">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+                <property name="can_focus">True</property>
+                <property name="has_focus">True</property>
+                <accelerator key="Return" signal="activate"/>
+                <signal name="changed" handler="on_keyserver_search_control_changed"/>
+                <signal name="activate" handler="on_keyserver_search_ok_clicked"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Where to search:</property>
+            <property name="use_markup">True</property>
+            <property name="use_underline">True</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">automatic</property>
+            <property name="propagate-natural-height">True</property>
+            <property name="max-content-height">250</property>
+            <child>
+              <object class="GtkListBox" id="key_server_list">
+                <property name="visible">True</property>
+                <property name="margin-start">18</property>
+                <property name="margin-end">18</property>
+                <style>
+                  <class name="content"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="cancelbutton">
+        <property name="label" translatable="yes">Cancel</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="can_default">True</property>
+        <property name="receives_default">False</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="searchbutton">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="can_default">True</property>
+        <property name="has_default">True</property>
+        <property name="receives_default">False</property>
+        <property name="label" translatable="yes">_Search</property>
+        <property name="use_underline">True</property>
+        <signal name="clicked" handler="on_keyserver_search_ok_clicked"/>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">cancelbutton</action-widget>
+      <action-widget response="accept" default="true">searchbutton</action-widget>
+    </action-widgets>
+  </template>
+</interface>
